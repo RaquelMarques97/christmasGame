@@ -1,0 +1,39 @@
+.game-container {
+    position:relative;
+    width:100vw;
+    height: 100vh;
+    background-color: blue;
+}
+
+.score {
+    position: absolute;
+    top:0;
+    right:0;
+    padding:10px 20px;
+    background: #fff;
+    z-index: 1;
+}
+.score h1 {
+    display: inline-block;
+    margin:0 0 0 25px;
+}
+.score * {
+    vertical-align: middle;
+}
+
+
+.start {
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50vw;
+    background: red;
+    z-index: 2;
+    box-shadow: 0 0 25px #000;
+}
+
+.play {
+    background-color:white;
+}
