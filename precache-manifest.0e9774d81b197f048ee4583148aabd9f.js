@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "99d9860d41c2d71521a30081249de579",
+    "revision": "a22834c97e26cb391e0349be2a75a159",
     "url": "/christmasGame/index.html"
   },
   {
-    "revision": "1bd8be8d48309307afba",
+    "revision": "2dddccbb4505975e9c69",
     "url": "/christmasGame/static/css/main.d2312f14.chunk.css"
   },
   {
-    "revision": "8223b5bfbc416caa50b3",
-    "url": "/christmasGame/static/js/2.82e21abe.chunk.js"
+    "revision": "30824f3333d79c643df5",
+    "url": "/christmasGame/static/js/2.520767be.chunk.js"
   },
   {
-    "revision": "1bd8be8d48309307afba",
-    "url": "/christmasGame/static/js/main.199efc77.chunk.js"
+    "revision": "2dddccbb4505975e9c69",
+    "url": "/christmasGame/static/js/main.67fb5168.chunk.js"
   },
   {
     "revision": "69d213a96f1fae2809d2",
