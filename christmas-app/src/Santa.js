@@ -15,7 +15,7 @@ class Santa extends Component {
     moveSantaDown = () => {
         // Window (viewport) height: window.innerHeight
         if (this.state.positionY < window.innerHeight - 55) {
-            var newY = this.state.positionY + 5;
+            var newY = this.state.positionY + 10;
 
             this.setState({
                 positionY: newY
@@ -28,7 +28,7 @@ class Santa extends Component {
 
     moveSantaUp = () => {
         if (this.state.positionY > 0) {
-            var newY = this.state.positionY - 5;
+            var newY = this.state.positionY - 10;
 
             this.setState({
                 positionY: newY

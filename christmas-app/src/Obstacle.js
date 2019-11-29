@@ -6,11 +6,15 @@ class Obstacle extends Component {
     constructor(props) {
         super(props);
 
+        var id = Math.round(Math.random() * 2);
+        var obstacleImage = `obstacles-${id}.png`;
+
         this.state = {
             obstaclePositionX: window.innerWidth,
             obstaclePositionY: Math.random() * (window.innerHeight - 60),
             speed: Math.random() * (20 - 10) + 10,
-            intervalId: null
+            intervalId: null,
+            image: obstacleImage
         }
     }
 
@@ -52,7 +56,7 @@ class Obstacle extends Component {
     render() {
         return (
             <div className='obstacle' style={{ top: this.state.obstaclePositionY, left: this.state.obstaclePositionX }}>
-                <img className='alien' src='alien.png' alt=''></img>
+                <img className='alien' src={this.state.image} alt=''></img>
             </div>
         )
     }

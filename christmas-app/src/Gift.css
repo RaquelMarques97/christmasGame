@@ -1,6 +1,6 @@
 .gift {
     position:absolute;
-  
+    z-index: 10;
     
 }
 

@@ -1,12 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import './HomePage.css';
 
-function Home() {
+
+function Home(props) {
+
     return (
+        <div className='intro'>
+            <div className='story'>
+                <h1 className='name'>Clumsy Santa </h1>
 
-        <div className='start'>
-            Santa lost lots of presents along the way, help him to recover them!
-        <div> <NavLink exact to="/GameView" className='play'>Play</NavLink></div>
+                <p>Once upon a time..."somehow"...</p>
+                <p>Santa got distracted and lost a lot of presents </p>
+                <p>along the way...</p>
+                <img className='inlove' src='inlove.gif' alt=''></img>
+            </div>
+            <div className='start'>
+                <p>Will you help him to recover them?</p>
+                <div>
+                    <button className='go' onClick={props.playCallback}>Play</button>
+                </div>
+            </div>
         </div>
     );
 }

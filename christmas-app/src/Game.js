@@ -4,31 +4,58 @@ import './Game.css';
 import Gift from './Gift.js';
 import Santa from './Santa.js';
 import Obstacle from './Obstacle.js';
+import { isNumber } from 'util';
 
 
 class Game extends Component {
     constructor(props) {
         super(props);
 
+        // Ler record do local storage
+        var record = parseInt(localStorage.getItem('record'));
+
         this.state = {
             santaPositionX: 10,
             santaPositionY: 0,
-            obstaclePositionY: 0,
-            obstaclePositionX: 0,
             points: 0,
-            record: localStorage.getItem('record') != null ? localStorage.getItem('record') : 0,
+            record: isNumber(record) ? record : 0,
             giftsArray: [],
-            obstacleArray: []
+            obstacleArray: [],
+            countdown: 3,
+            giftIntervalId: null,
+            obstacleIntervalId: null,
+            countdownIntervalId: null
         }
     }
 
     componentDidMount() {
-        setInterval(this.newGift, 2000);
-        setInterval(this.newObstacle, 2500);
+        var giftInterval = setInterval(this.newGift, 2000);
+        var obstacleInterval = setInterval(this.newObstacle, 2500);
+        var countdownInterval = setInterval(this.countdown, 500);
+
+        this.setState({
+            giftIntervalId: giftInterval,
+            obstacleIntervalId: obstacleInterval,
+            countdownIntervalId: countdownInterval
+        });
     }
 
+    componentWillUnmount() {
+        clearInterval(this.state.giftIntervalId);
+        clearInterval(this.state.obstacleIntervalId);
+    }
 
     /*---------------------------------------------*/
+
+    countdown = () => {
+        var newCountdown = this.state.countdown - 1;
+        this.setState({ countdown: newCountdown })
+
+        if (newCountdown === 0) {
+            clearInterval(this.state.countdownIntervalId);
+        }
+    }
+
     // adicionar dinamicamente itens ao giftsArray
     newGift = () => {
         var gifts = this.state.giftsArray;
@@ -51,7 +78,7 @@ class Game extends Component {
         });
     }
 
-    // adicionar dinamicamente itens ao obsctacleArray
+    // adicionar dinamicamente itens ao obsctacleArraykey
     newObstacle = () => {
         var obstacles = this.state.obstacleArray;
 
@@ -76,7 +103,7 @@ class Game extends Component {
 
     gameOver = () => {
         if (this.state.points > this.state.record) {
-            localStorage.setItem('record', (this.state));//here I'm saving the record in local storage if the user makes more points than the record
+            localStorage.setItem('record', this.state.points);//here I'm saving the record in local storage if the user makes more points than the record
         }
         this.props.gameOverCallback()
     }
@@ -85,25 +112,34 @@ class Game extends Component {
         // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
         var santaX = this.state.santaPositionX;
         var santaY = this.state.santaPositionY;
-        var santaW = 250;
-        var santaH = 100;
+        var santaW = 300;
+        var santaH = 120;
 
         if (santaX < x + w &&
             santaX + santaW > x &&
             santaY < y + h &&
             santaY + santaH > y) {
 
-            if (type === 'gift') {
-                // Remover o presente porque foi apanhado
-                this.removeGift(key);
+            switch (type) {
+                case 'star':
+                    this.setState({
+                        points: this.state.points + 10
+                    });
+                    this.removeGift(key);
+                    document.getElementById("hohoho").play();
+                    break;
 
-                // Somar o número de presentes apanhados
-                this.setState({
-                    points: this.state.points + 1
-                });
-            } else {
-                this.gameOver();
+                case 'gift':
+                    this.setState({
+                        points: this.state.points + 1
+                    });
+                    this.removeGift(key);
+                    document.getElementById("hohoho").play();
+                    break;
 
+                default:
+                    this.gameOver();
+                    break;
             }
         }
     }
@@ -118,28 +154,44 @@ class Game extends Component {
     /*---------------------------------------------*/
 
     render() {
-        return (
-            <div className='game-container'>
-                {/*} <div className='start'>
-                    Santa lost lots of presents along the way, help him to recover them!
-                    <button className='play'>Play</button>
-        </div>*/}
-                <div className='score'>
-                    <img className='presents1' src='presents1.png' alt=''></img>
-                    <h1>{this.state.points} (record: {this.state.record})</h1>
+        const { countdown } = this.state;
+
+        if (countdown > 0) {
+            return (
+                <div className='countdown'>
+                    {countdown}
                 </div>
-                <Santa moveCallback={this.saveSantaPositionCallback} />
-                {
-                    this.state.giftsArray.filter(gift => gift !== null).map((giftId) => (
-                        <Gift key={giftId} giftKey={giftId} removeCallback={this.removeGift} moveCallback={this.detectCollisionCallback} />
-                    ))
-                }
-                {this.state.obstacleArray.filter(obstacle => obstacle !== null).map((obstacleId) => (
-                    <Obstacle key={obstacleId} obstacleKey={obstacleId} removeCallback={this.removeObstacle} moveCallback={this.detectCollisionCallback} />
-                ))
-                }
-            </div>
-        )
+            )
+
+        } else {
+
+            return (
+                <div className='game-container'>
+                    <div className="stars"></div>
+                    <div className="twinkling"></div>
+                    <div className="clouds"></div>
+
+                    <audio id="background-music" src="/background.mp3" autoPlay loop />
+
+                    <div className='score'>
+                        <img className='presents1' src='presents-1.png' alt=''></img>
+                        <p>{this.state.points} (record: {this.state.record})</p>
+                    </div>
+                    <Santa moveCallback={this.saveSantaPositionCallback} />
+                    <audio id="hohoho" src="/hohoho.wav" />
+                    {
+                        this.state.giftsArray.filter(gift => gift !== null).map((giftId) => (
+                            <Gift key={giftId} giftKey={giftId} removeCallback={this.removeGift} moveCallback={this.detectCollisionCallback} />
+                        ))
+                    }
+                    {
+                        this.state.obstacleArray.filter(obstacle => obstacle !== null).map((obstacleId) => (
+                            <Obstacle key={obstacleId} obstacleKey={obstacleId} removeCallback={this.removeObstacle} moveCallback={this.detectCollisionCallback} />
+                        ))
+                    }
+                </div>
+            )
+        }
     }
 }
 

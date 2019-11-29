@@ -6,11 +6,24 @@ class Gift extends Component {
     constructor(props) {
         super(props);
 
+        var giftType = Math.random() > 0.8 ? 'star' : 'gift';
+        var giftImage;
+
+        if (giftType === 'gift') {
+            var id = Math.round(Math.random() * 5);
+
+            giftImage = `presents-${id}.png`;
+        }
+
+
+
         this.state = {
             giftPositionX: window.innerWidth,
             giftPositionY: Math.random() * (window.innerHeight - 60),
             speed: Math.random() * (20 - 10) + 10,
-            intervalId: null
+            intervalId: null,
+            type: giftType,
+            image: giftImage
         }
     }
 
@@ -43,18 +56,30 @@ class Gift extends Component {
                 giftPositionX: newX
             });
 
-            this.props.moveCallback(newX, this.state.giftPositionY, 60, 60, this.props.giftKey, 'gift');
+            this.props.moveCallback(newX, this.state.giftPositionY, 60, 60, this.props.giftKey, this.state.type);
         }
     }
 
     /*---------------------------------------------*/
 
     render() {
-        return (
-            <div className='gift' style={{ top: this.state.giftPositionY, left: this.state.giftPositionX }}>
-                <img className='presents1' src='presents1.png' alt=''></img>
-            </div>
-        )
+        switch (this.state.type) {
+            case 'star':
+                return (
+                    <div className='gift' style={{ top: this.state.giftPositionY, left: this.state.giftPositionX }}>
+                        <img className='presents1' src='star.png' alt=''></img>
+                    </div>
+                );
+
+            case 'gift':
+                return (
+                    <div className='gift' style={{ top: this.state.giftPositionY, left: this.state.giftPositionX }}>
+                        <img className='presents1' src={this.state.image} alt=''></img>
+                    </div>
+                );
+            default:
+                break;
+        }
     }
 }
 

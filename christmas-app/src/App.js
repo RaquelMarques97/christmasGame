@@ -1,24 +1,59 @@
 import React from 'react';
 import './App.css';
-import GameView from './GameView.js'
+import { Component } from 'react';
+import Game from './Game.js'
+import GameOver from './GameOver.js';
 import Home from './Homepage.js';
-import { Switch, HashRouter, Route } from 'react-router-dom';
 
+class App extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      currentPage: 'home'
+    }
+  }
 
+  onGameOver = () => {
+    this.setState({
+      currentPage: 'gameOver'
+    })
+  }
 
-function App() {
+  onPlay = () => {
+    this.setState({
+      currentPage: 'play'
+    })
+  }
 
-  return (
-    <HashRouter basename="/ChristmasGame">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/GameView" component={GameView} />
-      </Switch>
-    </HashRouter>);
+  onTryAgain = () => {
+    this.setState({
+      currentPage: 'play'
+    })
+  }
+
+  render() {
+    switch (this.state.currentPage) {
+      case 'home':
+        return (
+          <Home playCallback={this.onPlay} />
+        );
+
+      case 'play':
+        return (
+          <Game gameOverCallback={this.onGameOver} />
+        );
+
+      case 'gameOver':
+        return (
+          <GameOver tryAgainCallback={this.onTryAgain} />
+        );
+
+      default:
+        break;
+    }
+  }
+
 }
-
-
-
 
 export default App;
