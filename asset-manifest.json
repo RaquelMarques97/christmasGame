@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/christmasGame/static/css/main.d2312f14.chunk.css",
-    "main.js": "/christmasGame/static/js/main.67fb5168.chunk.js",
-    "main.js.map": "/christmasGame/static/js/main.67fb5168.chunk.js.map",
+    "main.js": "/christmasGame/static/js/main.b773d67f.chunk.js",
+    "main.js.map": "/christmasGame/static/js/main.b773d67f.chunk.js.map",
     "runtime-main.js": "/christmasGame/static/js/runtime-main.88b27675.js",
     "runtime-main.js.map": "/christmasGame/static/js/runtime-main.88b27675.js.map",
-    "static/js/2.520767be.chunk.js": "/christmasGame/static/js/2.520767be.chunk.js",
-    "static/js/2.520767be.chunk.js.map": "/christmasGame/static/js/2.520767be.chunk.js.map",
+    "static/js/2.6a2f44bd.chunk.js": "/christmasGame/static/js/2.6a2f44bd.chunk.js",
+    "static/js/2.6a2f44bd.chunk.js.map": "/christmasGame/static/js/2.6a2f44bd.chunk.js.map",
     "index.html": "/christmasGame/index.html",
-    "precache-manifest.0e9774d81b197f048ee4583148aabd9f.js": "/christmasGame/precache-manifest.0e9774d81b197f048ee4583148aabd9f.js",
+    "precache-manifest.60dd3ef56812f1b7bacff78e3aaf725b.js": "/christmasGame/precache-manifest.60dd3ef56812f1b7bacff78e3aaf725b.js",
     "service-worker.js": "/christmasGame/service-worker.js",
     "static/css/main.d2312f14.chunk.css.map": "/christmasGame/static/css/main.d2312f14.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.88b27675.js",
-    "static/js/2.520767be.chunk.js",
+    "static/js/2.6a2f44bd.chunk.js",
     "static/css/main.d2312f14.chunk.css",
-    "static/js/main.67fb5168.chunk.js"
+    "static/js/main.b773d67f.chunk.js"
   ]
 }
