@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import Game from './Game.js'
+import GameOver from './GameOver.js';
+import Home from './Homepage.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentPage: 'home'
+    }
+  }
+
+  onGameOver = () => {
+    this.setState({
+      currentPage: 'gameOver'
+    })
+  }
+
+  onPlay = () => {
+    this.setState({
+      currentPage: 'play'
+    })
+  }
+
+  onTryAgain = () => {
+    this.setState({
+      currentPage: 'play'
+    })
+  }
+
+  render() {
+    switch (this.state.currentPage) {
+      case 'home':
+        return (
+          <Home playCallback={this.onPlay} />
+        );
+
+      case 'play':
+        return (
+          <Game gameOverCallback={this.onGameOver} />
+        );
+
+      case 'gameOver':
+        return (
+          <GameOver tryAgainCallback={this.onTryAgain} />
+        );
+
+      default:
+        break;
+    }
+  }
+
 }
 
 export default App;

@@ -1,0 +1,18 @@
+.santa {
+    position:absolute;
+    left:10px;
+    width:300px;
+    height:120px;
+    z-index: 12;
+}
+
+
+@media (max-width: 1024px) {
+    .santa{
+        width:250px;
+        height:70px;
+    }
+
+    
+}
+

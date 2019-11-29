@@ -1,0 +1,9 @@
+.obstacle {
+    position:absolute;
+    z-index: 10;
+}
+
+.alien {
+    height:60px;
+    width:70px;
+}
