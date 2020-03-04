@@ -14,7 +14,7 @@ function GameOver(props) {
             <div className="snow middleground layered"></div>
             <div className="snow background"></div>
             <div className="snow background layered"></div>
-            <audio id="crash" src="/crash.mp3" autoPlay />
+            <audio id="crash" src="./crash.mp3" autoPlay />
             <div>We Crashed AGAIN?</div>
             <div className='rudolf'>That's it Rudolf!!!! I'm bying robots!!!</div>
             <div className='gif'><img src='robots.gif' alt='' ></img> </div>
