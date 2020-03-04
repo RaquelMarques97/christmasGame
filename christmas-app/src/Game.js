@@ -4,7 +4,6 @@ import './Game.css';
 import Gift from './Gift.js';
 import Santa from './Santa.js';
 import Obstacle from './Obstacle.js';
-import { isNumber } from 'util';
 
 
 class Game extends Component {
@@ -12,13 +11,13 @@ class Game extends Component {
         super(props);
 
         // Ler record do local storage
-        var record = parseInt(localStorage.getItem('record'));
+        var record = localStorage.getItem('record')
 
         this.state = {
             santaPositionX: 10,
             santaPositionY: 0,
             points: 0,
-            record: isNumber(record) ? record : 0,
+            record: record,
             giftsArray: [],
             obstacleArray: [],
             countdown: 3,
@@ -26,6 +25,7 @@ class Game extends Component {
             obstacleIntervalId: null,
             countdownIntervalId: null
         }
+
     }
 
     componentDidMount() {
@@ -171,14 +171,14 @@ class Game extends Component {
                     <div className="twinkling"></div>
                     <div className="clouds"></div>
 
-                    <audio id="background-music" src="/background.mp3" autoPlay loop />
+                    <audio id="background-music" src="./background.mp3" autoPlay loop />
 
                     <div className='score'>
                         <img className='presents1' src='presents-1.png' alt=''></img>
                         <p>{this.state.points} (record: {this.state.record})</p>
                     </div>
                     <Santa moveCallback={this.saveSantaPositionCallback} />
-                    <audio id="hohoho" src="/hohoho.wav" />
+                    <audio id="hohoho" src="./hohoho.wav" />
                     {
                         this.state.giftsArray.filter(gift => gift !== null).map((giftId) => (
                             <Gift key={giftId} giftKey={giftId} removeCallback={this.removeGift} moveCallback={this.detectCollisionCallback} />
